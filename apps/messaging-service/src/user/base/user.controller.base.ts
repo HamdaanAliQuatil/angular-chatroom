@@ -50,12 +50,10 @@ export class UserControllerBase {
     return await this.service.create({
       data: data,
       select: {
-        firstName: true,
+        alias: true,
         id: true,
-        lastName: true,
         message: true,
         roles: true,
-        updatedAt: true,
         username: true,
       },
     });
@@ -78,12 +76,10 @@ export class UserControllerBase {
     return this.service.findMany({
       ...args,
       select: {
-        firstName: true,
+        alias: true,
         id: true,
-        lastName: true,
         message: true,
         roles: true,
-        updatedAt: true,
         username: true,
       },
     });
@@ -107,12 +103,10 @@ export class UserControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        firstName: true,
+        alias: true,
         id: true,
-        lastName: true,
         message: true,
         roles: true,
-        updatedAt: true,
         username: true,
       },
     });
@@ -145,12 +139,10 @@ export class UserControllerBase {
         where: params,
         data: data,
         select: {
-          firstName: true,
+          alias: true,
           id: true,
-          lastName: true,
           message: true,
           roles: true,
-          updatedAt: true,
           username: true,
         },
       });
@@ -182,12 +174,10 @@ export class UserControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          firstName: true,
+          alias: true,
           id: true,
-          lastName: true,
           message: true,
           roles: true,
-          updatedAt: true,
           username: true,
         },
       });

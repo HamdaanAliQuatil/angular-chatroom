@@ -8,14 +8,12 @@ generator client {
 }
 
 model User {
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  message   String?
-  password  String
-  roles     Json
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  alias    String?
+  id       String  @id @default(cuid())
+  message  String?
+  password String
+  roles    Json
+  username String  @unique
 }
 
 model User1 {
