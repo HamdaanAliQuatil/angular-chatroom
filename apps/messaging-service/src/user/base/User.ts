@@ -11,11 +11,10 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate } from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
-import { Type } from "class-transformer";
 
 @ObjectType()
 class User {
@@ -28,7 +27,7 @@ class User {
   @Field(() => String, {
     nullable: true,
   })
-  firstName!: string | null;
+  alias!: string | null;
 
   @ApiProperty({
     required: true,
@@ -47,17 +46,6 @@ class User {
   @Field(() => String, {
     nullable: true,
   })
-  lastName!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
   message!: string | null;
 
   @ApiProperty({
@@ -66,14 +54,6 @@ class User {
   @IsJSONValue()
   @Field(() => GraphQLJSON)
   roles!: JsonValue;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
 
   @ApiProperty({
     required: true,

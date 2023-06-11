@@ -19,41 +19,33 @@ import { UserService } from "../user.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  firstName: "exampleFirstName",
+  alias: "exampleAlias",
   id: "exampleId",
-  lastName: "exampleLastName",
   message: "exampleMessage",
   password: "examplePassword",
-  updatedAt: new Date(),
   username: "exampleUsername",
 };
 const CREATE_RESULT = {
-  firstName: "exampleFirstName",
+  alias: "exampleAlias",
   id: "exampleId",
-  lastName: "exampleLastName",
   message: "exampleMessage",
   password: "examplePassword",
-  updatedAt: new Date(),
   username: "exampleUsername",
 };
 const FIND_MANY_RESULT = [
   {
-    firstName: "exampleFirstName",
+    alias: "exampleAlias",
     id: "exampleId",
-    lastName: "exampleLastName",
     message: "exampleMessage",
     password: "examplePassword",
-    updatedAt: new Date(),
     username: "exampleUsername",
   },
 ];
 const FIND_ONE_RESULT = {
-  firstName: "exampleFirstName",
+  alias: "exampleAlias",
   id: "exampleId",
-  lastName: "exampleLastName",
   message: "exampleMessage",
   password: "examplePassword",
-  updatedAt: new Date(),
   username: "exampleUsername",
 };
 
@@ -137,22 +129,14 @@ describe("User", () => {
       .post("/users")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
-      .expect({
-        ...CREATE_RESULT,
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
-      });
+      .expect(CREATE_RESULT);
   });
 
   test("GET /users", async () => {
     await request(app.getHttpServer())
       .get("/users")
       .expect(HttpStatus.OK)
-      .expect([
-        {
-          ...FIND_MANY_RESULT[0],
-          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
-        },
-      ]);
+      .expect([FIND_MANY_RESULT[0]]);
   });
 
   test("GET /users/:id non existing", async () => {
@@ -170,10 +154,7 @@ describe("User", () => {
     await request(app.getHttpServer())
       .get(`${"/users"}/${existingId}`)
       .expect(HttpStatus.OK)
-      .expect({
-        ...FIND_ONE_RESULT,
-        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
-      });
+      .expect(FIND_ONE_RESULT);
   });
 
   test("POST /users existing resource", async () => {
@@ -182,10 +163,7 @@ describe("User", () => {
       .post("/users")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
-      .expect({
-        ...CREATE_RESULT,
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
-      })
+      .expect(CREATE_RESULT)
       .then(function () {
         agent
           .post("/users")

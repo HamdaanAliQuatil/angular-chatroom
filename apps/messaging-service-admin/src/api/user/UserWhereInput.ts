@@ -2,9 +2,8 @@ import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 
 export type UserWhereInput = {
-  firstName?: StringNullableFilter;
+  alias?: StringNullableFilter;
   id?: StringFilter;
-  lastName?: StringNullableFilter;
   message?: StringNullableFilter;
   username?: StringFilter;
 };
